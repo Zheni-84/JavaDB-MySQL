@@ -1,0 +1,48 @@
+3 Databases Introduction. Data Definition and Datatypes
+https://youtu.be/H_kRgeOoJqc
+
+4. Exercise: Data Definition and Datatypes
+https://youtu.be/3FeYtJtsg3E
+
+5. Basic CRUD
+https://youtu.be/fUL5sWLc-gE
+
+6. Exercise: Basic CRUD
+https://youtu.be/hyYcBNjtD7c
+
+7. Built-in Functions
+https://youtu.be/vDQCIuunFzs
+
+8. Exercise: Built-in Functions
+https://softuni.bg/trainings/resources/video/68415/video-20-january-2022-nikolay-markov-mysql-january-2022/3602
+
+9. Data Aggregation
+https://youtu.be/z359b1ceuK8
+
+10. Exercise: Data Aggregation
+https://youtu.be/XH0OXMw1e9o
+
+11. Table Relations
+https://youtu.be/jWK3dg1H4GE
+
+12. Exercise: Table Relations
+https://youtu.be/kO2o2txgxUQ
+
+13. Subqueries and JOINs
+https://youtu.be/qICJCep4LaQ
+
+14. Exercise: Subqueries and JOINs
+https://youtu.be/j1X8QE5KDQA
+
+15. Database Programmability and Transactions
+https://youtu.be/AqhzMz46Dcs
+
+16. Exercise: Functions and Procedures
+https://youtu.be/NVmdxb09_Dc
+
+17. Exam Preparation 
+https://youtu.be/W14aPZyBbEk
+
+18. Exam Preparation
+https://youtu.be/p9Iee87gNS0
+
