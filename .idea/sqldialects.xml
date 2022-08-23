@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/Basic-CRUD-Exercise-17-Jan/Basic-CRUD-Exercise.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/Basic-CRUD-database-hotel.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/Data-Definition-and-Datatypes-Exercise.sql" dialect="MySQL" />
+  </component>
+</project>
