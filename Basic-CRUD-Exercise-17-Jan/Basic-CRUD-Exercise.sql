@@ -7,9 +7,8 @@ FROM departments
 ORDER BY department_id;
 
 -- 2. Find all Department Names
-SELECT DISTINCT(`name`)
-FROM departments
-ORDER BY `department_id`;
+SELECT `name`
+FROM departments;
 
 -- 3. Find first name, last name and salary of Each Employee
 SELECT `first_name`, `last_name`, `salary`

@@ -3,6 +3,14 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/Basic-CRUD-Exercise-17-Jan/Basic-CRUD-Exercise.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/Basic-CRUD-database-hotel.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/Built-in-Functions-Exercises-20-Jan/Built-in-Functions-Exercises.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/Built-in-Functions-Exercises-20-Jan/Orders-Database.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/Built-in-Functions-Exercises-20-Jan/diablo_database.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/Built-in-Functions-Exercises-20-Jan/geography_database.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/Data-Definition-and-Datatypes-Exercise.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/MySQL-Data-Agregation-Exercises-24-Jan/MySQL-Data-Agregation-Exercises.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/MySQL-Data-Agregation-Exercises-24-Jan/gringotts-database.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/Table-Relations/Table-Relations-exercise.sql" dialect="GenericSQL" />
+    <file url="PROJECT" dialect="MySQL" />
   </component>
 </project>
