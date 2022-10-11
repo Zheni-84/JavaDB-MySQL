@@ -146,3 +146,122 @@ BEGIN
     WHERE a.id = account_id;
 END$$
 
+-- 12.	Deposit Money
+DROP PROCEDURE IF EXISTS usp_deposit_money;
+CREATE PROCEDURE usp_deposit_money(account_id INT, money_amount DECIMAL(19, 4))
+BEGIN
+    START TRANSACTION;
+    IF (money_amount <= 0) THEN
+        ROLLBACK;
+    ELSE
+        UPDATE accounts
+        SET balance = balance + money_amount
+        WHERE id = account_id;
+        COMMIT;
+    END IF;
+END$$
+
+call usp_deposit_money(1, 10);
+SELECT *
+FROM accounts
+WHERE id = 1;
+
+-- 13. Withdraw Money
+DROP PROCEDURE IF EXISTS usp_withdraw_money;
+CREATE PROCEDURE usp_withdraw_money(account_id INT, money_amount DECIMAL(19, 4))
+BEGIN
+    START TRANSACTION;
+    IF (money_amount <= 0 OR
+        (SELECT balance FROM accounts WHERE id = account_id) < money_amount)
+    THEN
+        ROLLBACK;
+    ELSE
+        UPDATE accounts
+        SET balance = balance - money_amount
+        WHERE id = account_id;
+        COMMIT;
+    END IF;
+END$$
+
+-- 14.	Money Transfer
+DROP PROCEDURE IF EXISTS usp_transfer_money;
+CREATE PROCEDURE usp_transfer_money(from_account_id INT, to_account_id INT, amount DECIMAL(19, 4))
+this_proc:
+BEGIN
+    START TRANSACTION ;
+    IF from_account_id = to_account_id OR
+       (SELECT COUNT(id) FROM accounts WHERE id = from_account_id) <> 1 OR
+       (SELECT COUNT(id) FROM accounts WHERE id = to_account_id) <> 1
+    THEN
+        LEAVE this_proc;
+    ELSE
+        CALL usp_withdraw_money(from_account_id, amount);
+        CALL usp_deposit_money(to_account_id, amount);
+        COMMIT;
+    END IF;
+END$$
+
+call usp_transfer_money(2, 1, 700);
+
+-- v2
+CREATE PROCEDURE usp_transfer_money(from_account_id INT, to_account_id INT, amount DECIMAL(19, 4))
+BEGIN
+    START TRANSACTION ;
+    IF from_account_id = to_account_id OR
+       amount <= 0 OR
+       (SELECT balance FROM accounts WHERE id = from_account_id) < amount OR
+       (SELECT COUNT(id) FROM accounts WHERE id = from_account_id) <> 1 OR
+       (SELECT COUNT(id) FROM accounts WHERE id = to_account_id) <> 1
+    THEN
+        ROLLBACK;
+    ELSE
+        UPDATE accounts
+        SET balance = balance - amount
+        WHERE id = from_account_id;
+        UPDATE accounts
+        SET balance = balance + amount
+        WHERE id = to_account_id;
+        COMMIT;
+    END IF;
+END$$
+
+-- 15.	Log Accounts Trigger
+CREATE TABLE logs
+(
+    log_id     INT AUTO_INCREMENT PRIMARY KEY,
+    account_id INT,
+    old_sum    DEC(19, 4),
+    new_sum    DEC(19, 4)
+);
+
+CREATE TRIGGER tr_change_accounts_balance
+    AFTER UPDATE
+    ON accounts
+    FOR EACH ROW
+BEGIN
+    INSERT INTO logs(account_id, old_sum, new_sum)
+    VALUES (OLD.id, OLD.balance, NEW.balance);
+END$$
+
+-- 16.	Emails Trigger
+CREATE TABLE notification_emails
+(
+    id        INT PRIMARY KEY AUTO_INCREMENT,
+    recipient INT,
+    subject   TEXT,
+    body      TEXT
+);
+
+DROP TRIGGER IF EXISTS email_on_logs_insert;
+CREATE TRIGGER email_on_logs_insert
+    AFTER INSERT
+    ON logs
+    FOR EACH ROW
+BEGIN
+    INSERT INTO notification_emails(recipient, subject, body)
+    VALUES (NEW.account_id,
+            CONCAT('Balance change for account: ', NEW.account_id),
+            CONCAT('On ', NOW(), ' your balance was changed from ', NEW.old_sum, ' to ', NEW.new_sum, '.'));
+END$$
+
+call usp_transfer_money(2, 1, 55);
